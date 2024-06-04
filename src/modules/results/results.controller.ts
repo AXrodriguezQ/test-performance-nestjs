@@ -102,4 +102,5 @@ export class ResultsController {
   remove(@Param('id') id: string) {
     return this.resultsService.remove(+id);
   }
+  
 }
