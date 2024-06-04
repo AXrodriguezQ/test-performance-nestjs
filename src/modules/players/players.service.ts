@@ -41,7 +41,7 @@ export class PlayersService {
 
   }
 
-  async findAllPlayers({ limit, offset }: PaginationQuery): Promise<Player[]> {
+  async findAll({ limit, offset }: PaginationQuery): Promise<Player[]> {
     try {
       return await this.playersRepository.find({ relations: ['tournament'], skip: offset, take: limit });
     } catch (error) {

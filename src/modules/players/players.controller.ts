@@ -8,11 +8,12 @@ import { ApiBody, ApiOperation, ApiParam, ApiQuery, ApiResponse, ApiTags } from 
 @ApiTags ('Players')
 @Controller('players')
 export class PlayersController {
+
   constructor(private readonly playersService: PlayersService) {}
 
   @ApiBody({
     type: CreatePlayerDto,
-    description: 'Create player using plyer dto. ',
+    description: 'Create player using player dto. ',
     examples: {
       example1:{
         value:{
@@ -63,7 +64,7 @@ export class PlayersController {
   @ApiResponse({ status: 404, description: 'The player does not exist'})
   @Get()
   findAll(@Query() pagination: PaginationQuery) {
-    return this.playersService.findAllPlayers(pagination);
+    return this.playersService.findAll(pagination);
   }
   
   @ApiParam({
