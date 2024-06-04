@@ -11,9 +11,5 @@ export class AppController {
     return this.appService.index();
   }
 
-  @Get('*')
-  getOthersRoutes(): UnusedRoute {
-    return this.appService.othersRoutes();
-  }
 
 }

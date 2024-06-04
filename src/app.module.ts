@@ -7,6 +7,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { PlayersModule } from './modules/players/players.module';
 import { TournamentsModule } from './modules/tournaments/tournaments.module';
 import { ResultsModule } from './modules/results/results.module';
+import { PlayersController } from './modules/players/players.controller';
 
 @Module({
   imports: [

@@ -3,6 +3,8 @@ import { AppModule } from './app.module';
 import { dataSource } from './migrations/data/source.data';
 import { populatePlayersTable } from './migrations/seeds/players.seed';
 import { populateTournamentsTable } from './migrations/seeds/tournament.seed';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
 
@@ -24,9 +26,30 @@ async function bootstrap() {
       .catch((err) => console.log(`the db could not be populated... error:${err}`))
   }
 
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true,
+      forbidNonWhitelisted: true,
+      transform: true,
+      transformOptions: {
+        enableImplicitConversion: true,
+      },
+    }),
+  );
+
+  const config = new DocumentBuilder()
+    .setTitle('Van Rossum Tournaments')
+    .setDescription('Company dedicated to the management of tournaments video game')
+    .setVersion('1.0')
+    .addTag('Van Rossum Tournaments')
+    .build();
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('docs', app, document);
+
   await app.listen(PORT);
 
-  console.log(`App is listening on port ${PORT}`);
+  console.log(`App is listening in http://localhost:${PORT}/docs`);
+  console.log(`API documentation is available at http://localhost:${PORT}/docs`);
 
 }
 bootstrap();
