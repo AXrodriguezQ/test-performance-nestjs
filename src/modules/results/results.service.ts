@@ -1,26 +1,61 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CreateResultDto } from './dto/create-result.dto';
-import { UpdateResultDto } from './dto/update-result.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Result } from './entities/result.entity';
+import { Repository } from 'typeorm';
+import { PaginationQuery } from './dto/paginate-results.dto';
 
 @Injectable()
 export class ResultsService {
-  create(createResultDto: CreateResultDto) {
-    return 'This action adds a new result';
+
+  constructor(
+    @InjectRepository(Result) private readonly resultsRepository: Repository<Result>
+  ) {}
+
+  async create(createResultDto: CreateResultDto) {
+    try {
+
+      this.resultsRepository.create(createResultDto);
+
+      await this.resultsRepository.save(createResultDto);
+
+      return createResultDto;
+      
+    } catch (error) {
+
+      throw new HttpException('Error while creating results', HttpStatus.BAD_REQUEST);
+      
+    }
   }
 
-  findAll() {
-    return `This action returns all results`;
+  async findAll({ limit, offset }: PaginationQuery) {
+    try {
+      return await this.resultsRepository.find({ skip: offset, take: limit });
+    } catch (error) {
+      throw new HttpException('Error while loading results', HttpStatus.NO_CONTENT) 
+    }
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} result`;
-  }
+  async findOne(id: number) {
+    const query = this.resultsRepository.createQueryBuilder('result')
+      .where('player.id = :id', { id })
 
-  update(id: number, updateResultDto: UpdateResultDto) {
-    return `This action updates a #${id} result`;
+    const result = await query.getOne();
+
+    if ( !result ) throw new HttpException('result not found', HttpStatus.NOT_FOUND);
+
+    return result
   }
 
   remove(id: number) {
-    return `This action removes a #${id} result`;
+    try {
+      
+      this.resultsRepository.softDelete(id);
+
+    } catch (error) {
+      
+      throw new HttpException('Error while deleting result', HttpStatus.BAD_REQUEST);
+
+    }
   }
 }
