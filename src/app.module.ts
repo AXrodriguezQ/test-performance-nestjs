@@ -4,6 +4,9 @@ import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import config from './config/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { PlayersModule } from './modules/players/players.module';
+import { TournamentsModule } from './modules/tournaments/tournaments.module';
+import { ResultsModule } from './modules/results/results.module';
 
 @Module({
   imports: [
@@ -21,6 +24,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       autoLoadEntities: true,
       synchronize: true
     }),
+    PlayersModule,
+    TournamentsModule,
+    ResultsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
