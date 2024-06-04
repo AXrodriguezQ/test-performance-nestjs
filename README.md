@@ -26,13 +26,42 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
+## Instructions
+
+Follow these steps to use the API
+
 ## Installation
 
 ```bash
 $ npm install
 ```
+For the API to work you must install postgres to create a container with two images, one with postgreSQL and another with PGAdmin to be able to use the database
+
+- Docker Desktop: https://www.docker.com/products/docker-desktop/
+
+## Steps
+
+```bash
+$ docker-compose up
+```
+
+this command to be able to run the docker-compose file that is in the root of the project that is going to initialize and unload the two images, if you know about the subject you can modify the file to your liking, remember that for this to work you must have docker open or power on from terminal
+
+<hr>
+
+After this you can go to port 8081, which is by default in the file, or if you modified it you must enter that port from your browser
+
 
 ## Running the app
+
+<img src="./img/uno.PNG" alt="imagen-uno"></img><hr><br>
+<img src="./img/dos.PNG" alt="imagen-uno"></img><hr><br>
+<img src="./img/tres.PNG" alt="imagen-uno"></img><hr><br>
+At this point all that remains is to click on save and that's it, we can now run the application.
+<img src="./img/cuatro.PNG" alt="imagen-uno"></img><hr><br>
+<img src="./img/cinco.PNG" alt="imagen-uno"></img><hr><br>
+
+use any command to see the program
 
 ```bash
 # development
@@ -40,27 +69,13 @@ $ npm run start
 
 # watch mode
 $ npm run start:dev
-
-# production mode
-$ npm run start:prod
 ```
 
-## Test
+## finalized
 
-```bash
-# unit tests
-$ npm run test
+When everything is fine you can go to any endpoint or to any of the two routes that appear at the end, the documenting one with swagger or the api as such
 
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+# thanks for using the API
 
 ## Stay in touch
 
