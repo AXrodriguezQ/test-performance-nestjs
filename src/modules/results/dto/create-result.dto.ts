@@ -10,8 +10,4 @@ export class CreateResultDto {
     @IsNotEmpty()
     result: string;
 
-    @IsNumber()
-    @IsOptional()
-    date: string
-
 }
